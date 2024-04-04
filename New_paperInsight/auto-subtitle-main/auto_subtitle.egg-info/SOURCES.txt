@@ -1,0 +1,11 @@
+README.md
+setup.py
+auto_subtitle/__init__.py
+auto_subtitle/cli.py
+auto_subtitle/utils.py
+auto_subtitle.egg-info/PKG-INFO
+auto_subtitle.egg-info/SOURCES.txt
+auto_subtitle.egg-info/dependency_links.txt
+auto_subtitle.egg-info/entry_points.txt
+auto_subtitle.egg-info/requires.txt
+auto_subtitle.egg-info/top_level.txt

@@ -1,0 +1,513 @@
+IEEE COMMUNICATIONS SURVEYS & TUTORIALS, VOL. 15, NO. 1, FIRST QUARTER 2013                               167
+A Survey of Energy-Efficient Wireless Communications
+Daquan Feng, Chenzi Jiang, Gubong Lim, Leonard J. Cimini, Jr., Fellow, IEEE, Gang Feng, Senior Member, IEEE, and Geoffrey Ye Li, Fellow, IEEE
+
+
+
+
+Abstract—Reducing energy consumption in wireless commu- nications has attracted increasing attention recently. Advanced physical layer techniques such as multiple-input multiple-output (MIMO) and orthogonal frequency division multiplexing (OFDM), cognitive radio, network coding, cooperative communication, etc.; new network architectures such as heterogeneous networks, dis- tributed antennas, multi-hop cellulars, etc.; as well as radio and network resource management schemes such as various cross- layer optimization algorithms, dynamic power saving, multiple radio access technologies coordination, etc. have been proposed to address this issue. In this article, we overview these technologies and present the state-of-the-art on each aspect. Some challenges that need to be solved in the area are also described.
+Index Terms—energy efficiency, cooperative communication, cross-layer optimization, network design, MIMO, OFDMA.
+
+I. Iɴᴛʀᴏᴅᴜᴄᴛɪᴏɴ
+A. Why Energy-Efficient Communications?
+ITH the rapid and radical evolution of information and communication technology (ICT), corresponding
+energy consumption is also growing at a staggering rate [1]. Furthermore, it has been reported that mobile operators are already among the top energy consumers (for example, Telecom Italia is the second largest energy consumer in Italy [2]), and energy consumption of mobile networks is growing much faster than ICT on the whole [2]. Moreover, as the mass deployment of 3G systems in developing countries (like China and India) and later 4G systems worldwide occurs, mobile communications will consume significantly more energy if no effective actions are taken.
+A large electricity bill results from the huge energy con- sumption of a wireless base station (BS). From [3]–[6], more than 50% of the total energy is consumed by the radio access part, where 50-80% is used for the power amplifier (PA). In [6], it is also pointed out that the energy bill accounts for approximately 18% of the Operation Expenditure (OpEx) in the mature European market and at least 32% in India. Therefore, from the operators’ perspective, energy efficiency
+Manuscript received 26 March 2011; revised 7 September 2011 and 14 December 2011. The work was supported in part by the National Basic Research Program of China (973 Program) Grant No.2012CB316003 and the National Science Foundation (NSF) under Grant No. 1017192 and No. 1017053.
+D. Feng and G. Feng are with National key Laboratory of Science and Technology on Communications, University of Electronic Science and Technology of China, Chengdu, China (e-mail: fdquan@gmail.com).
+C. Jiang, G. Lim, and L. Cimini are with Department of Electrical and Computer Engineering, University of Delaware, Newark, DE, USA.
+G. Li is with the School of ECE, Georgia Institute of Technology, Atlanta, GA, USA.
+Digital Object Identifier 10.1109/SURV.2012.020212.00049
+
+
+(EE) not only has great ecological benefits and represents social responsibility in fighting climate change, but also has significant economic benefits. Thus, it is urgent to shift from pursuing optimal capacity and spectral efficiency to efficient energy usage when designing wireless networks.
+From the users’ perspective, energy-efficient wireless com- munication is also imperative. According to the 2010 wireless smartphone customer satisfaction study from J. D. Power and Associates [7], the iPhone received top marks in every cate- gory except for battery life. The latest report [8] in China also reflects the same problem. Based on the data in [8], up to 60% of the users complained that battery endurance was the greatest hurdle when using 3G services. Without a breakthrough in battery technology, the battery life of the terminal sets will be the biggest limitation for energy-hungry applications (e.g., video games, mobile P2P, interactive video, video monitors, streaming multimedia, mobile TV, 3D services, and video sharing).
+
+B. Research Activities
+As observed in [9], with the explosive growth of high-data- rate applications in wireless networks, EE in wireless com- munications has recently drawn increasing attention from the research community. Several international research projects dedicated to energy-efficient wireless communications are being carried out. Table I outlines the main solutions to dealing with EE from Green Radio [5], EARTH [10], [11], OPERA- Net [12], [13], and eWIN [14], [15].
+From Table I, it is clear that low-power circuit design, high-efficiency PA and digital signal processing (DSP) tech- nologies, advanced cooling systems, adequate EE metric and energy consumption models, cell-size deployment, various relay and cooperative communications, adaptive traffic pattern and load variation algorithms, and energy-efficient network re- source management, as well as MIMO and OFDM techniques, are the highlights of energy-efficient wireless communica- tions. However, since energy-efficient hardware techniques and cooling systems are outside our research field, they are not included in this survey.
+In this paper, the state of the art in algorithms and schemes for energy-efficient wireless networks are introduced. Some challenging issues in these areas are also discussed. In partic- ular, in Section II, we analyze the influence of the EE metric and energy consumption models on energy-efficient wireless networks. In Section III, we describe how to make use of daily network traffic variations and various quality-of-service (QoS) requirements to save energy. Section IV discusses various
+1553-877X/13/$31.00 ⃝c 2013 IEEE
+
+168                               IEEE COMMUNICATIONS SURVEYS & TUTORIALS, VOL. 15, NO. 1, FIRST QUARTER 2013
+
+TABLE I
+Pᴏꜱꜱɪʙʟᴇ Sᴏʟᴜᴛɪᴏɴꜱ ꜰᴏʀ Eɴᴇʀɢʏ-Eꜰꜰɪᴄɪᴇɴᴛ Wɪʀᴇʟᴇꜱꜱ Cᴏᴍᴍᴜɴɪᴄᴀᴛɪᴏɴ
+
+
+Project Name Green Radio
+
+1. Energy Metrics & Models:
+⋄ Energy metrics to accurately quantify consumption
+⋄ Communications energy consumption models
+2. Energy-Efficient Hardware:
+Solutions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EARTH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OPERA- Net
+
+
+
+
+
+
+
+
+
+
+
+
+
+eWin
+⋄ Hardware integration & advanced power amplifier techniques
+⋄ Energy-efficient DSP Techniques
+⋄ Maximize equipment and base station re-use
+3. Energy-Efficient Architectures:
+⋄ Large vs. small cell deployment
+⋄ Overlay source (microcell, picocell, femtocell) & multi-hop routing, relay & network coding and cooperative networking
+⋄ Bounding energy requirements by strict end-to-end QoS and efficient backhaul
+4. Energy-Efficient Resource Management:
+⋄ Differentiated QoS, exploiting delay tolerant applications and user mobility for energy reduction
+⋄ SISO vs. MIMO with packet scheduling
+⋄ Identification of energy-efficient cooperative physical layer architecture using emerging information theory ideas to mitigate interference
+⋄ Applying dynamic spectrum access (DSA) to minimize energy consumption
+⋄ Solar-powered relaying allocating resources to match combined traffic and weather patterns
+1. Energy-Efficient Analysis, Metrics and Targets:
+⋄ Life cycle analysis of energy consumption by telecommunications products
+⋄ Energy-efficient metrics on system level
+2. Energy-Efficient Architectures:
+⋄ Optimization of cell size
+⋄ Heterogeneous network deployment
+⋄ Relay and cooperative communications
+3. Energy-Efficient Resource Management:
+⋄ Dynamic load adaptation and transmission mode adaptation
+⋄ Cooperative scheduling, interference coordination, and joint power and resource allocation
+⋄ Multi-RAT (radio access technology) coordination
+4. Radio Technologies and Components:
+⋄ MIMO, OFDM, adaptive antennas and other advanced transmission techniques
+⋄ Power scalable transceiver and power control on component, front end and system level
+1. Energy-Efficient Mobile Radio Access Network:
+⋄ Define key performance indicators for energy efficiency
+⋄ Energy saving in base stations, network variations in traffic, cell breathing based on network loads, and sleep mode
+⋄ Efficiency from the management of MAC, DC power, cooling system, etc.
+2. Link Level:
+⋄ Optimization techniques for link-level energy efficiency (scalable MIMO-detection, fountain codes and amplitude modulation, scalable turbo-decoding)
+⋄ Energy-aware device (terminals and infrastructure) design
+3. Technology Enablers:
+⋄ Develop new high-efficiency power amplifier
+⋄ Innovative energy recovering technique
+4. Network Test Bed:
+⋄ Integration of devices
+⋄ Mobile radio access network’s end-to-end efficiency
+1. Energy-Efficient Architectures:
+⋄ Architectural designs for low-energy wireless access exploiting ”novel” tradeoffs between spectrum, service quality, and energy consumption
+⋄ Infrastructure and novel networking paradigms for delay-tolerant services
+2. Energy-Efficient Resource Management:
+⋄ Auto(re)-configuration of control software and networking resources, in response to changes in infrastructure and demand
+⋄ Dynamic and flexible spectrum management techniques
+⋄ Radio resource management for cooperative and competitive heterogeneous environments
+⋄ Policy-driven management that implements business-level objectives
+
+
+deployment strategies including cell-size deployment, hetero- geneous networks, cooperative communications, and network coding. In Section V, we discuss MIMO and OFDMA, along with cross-layer optimization. Finally, we conclude the paper in Section VI.
+II. EE Mᴇᴛʀɪᴄ Eɴᴇʀɢʏ Cᴏɴꜱᴜᴍᴘᴛɪᴏɴ Mᴏᴅᴇʟꜱ
+An adequate EE metric is of primary importance in overall energy-efficient network design since it is directly related to the optimized decisions across all the protocol layers. In the
+literature, several different EE metrics have been used. The most popular is ’bits-per-Joule’, which is defined as the system throughput for unit-energy consumption. Some information- theoretic results for energy-efficient communications at the link level, based on the bits-per-Joule metric, are given in [16]–[19], where the transmit power limitation is considered as the primary constraint. It is proved that the supremum channel capacity per unit energy can only be achieved by using an unlimited number of degrees of freedom per information bit (transmit with infinite bandwidth or with the longest
+
+FENG et al.: A SURVEY OF ENERGY-EFFICIENT WIRELESS COMMUNICATIONS                                    169
+
+
+
+10²
+
+
+
+10¹
+
+
+
+10⁰
+
+
+
+10-1
+
+
+
+
+
+
+10-2
+
+
+
+
+Transmit energy Circuit energy Total energy
+
+
+
+
+
+
+
+
+
+
+0    0.5    1    1.5    2    2.5    3
+TransmissionTime Per Bit (s)
+
+that when circuit power is taken into account, there exists a crossover in the transmission rate with respect to EE between MIMO and single-input multiple-output (SIMO). Below the crossover point, SIMO is more energy-efficient; above it, MIMO is more energy-efficient. In addition, an adaptive switching mechanism, between MIMO and SIMO, is proposed in [28] that can reduce the energy consumption by more than 50% compared with using MIMO under all conditions. In [29], it is shown that even when the energy consumption of the local information exchange for cooperation is considered, MIMO still outperforms direct transmission as long as the transmission distances larger than a given threshold. In [30], a link-adaptive transmission scheme for MIMO-OFDM systems is proposed, which maximizes EE in terms of bits-per-Joule using dynamic power allocation based on the channel state as well as the circuit power consumption.
+
+Fig. 1.  Circuit energy and transmit energy trade-off for overall energy-
+efficiency
+
+
+duration). In [20], the bits-per-Joule capacity at the network level is analyzed, where it is proved that the bits-per-Joule capacity increases with the number of nodes in the networks and implies that large-scale energy-limited sensor and ad- hoc networks may be only suitable for delay-tolerant data application. The bits-per-Joule metric is also widely used as the utility function in game-theoretic approaches for energy saving in wireless networks [21]–[24]. In the aforementioned research work, the energy consumption models only consider the transmit power associated with data transmission rate; however, transmit power is only a part of the overall energy budget. When the energy consumption of other parts (e.g. circuit power consumption of the transceiver) is taken into account, the energy-efficient schemes described in [16]–[24] might not be appropriate. For example, the mathematical analysis in [25] shows that energy-efficient transmission by transmitting with the longest duration, is no longer the opti- mal approach. As an illustration, Fig.1 from [25] shows the tradeoff between circuit energy and transmit energy for the overall EE.
+Based on the fact that for a given bit error probability, the signal-to-noise-ratio (SNR) per bit ¹ requirement in- creases with M for M-ary quadrature amplitude modulation (MQAM) and decreases with M for M-ary frequency-shift keying (MFSK), it is thought that MFSK is more energy- efficient than MQAM [26]. However, it is shown in [27] that it may no longer be true when the circuit power is considered. The authors show that only when transmit power dominates the total power consumption, as for long-range applications, is MFSK more energy-efficient than MQAM; and, when the circuit power dominates the total power consumption, as for short-range applications, MQAM is more energy-efficient. It is also shown in [27] that by optimizing the transmission time and the modulation parameters, up to 80% savings in energy is achievable compared with a non-optimized strategy for uncoded systems. Similarly, it is demonstrated in [28]
+
+1SNR per bit is often denoted as Eb/N₀, where Eb refers to the received energy per information bit, and N₀ refers to the power spectral density of the noise.
+Obviously, the different methods for modeling the ”energy consumption” have significant impact on the bits-per-Joule metric. Thus, it is important to set up a precise energy consumption model. There has been some work in this area. For instance, energy consumption models of macrocellular and microcellular base stations are investigated in [31]. In these models, the energy consumed at the base station with no traffic load, dubbed the ’static energy part’, and the ’dynamic energy part’, which depends on the traffic load, are added together to give the total energy consumption of the base station. It is found that the power consumption depends largely on the type of base station. In particular, the energy consumption of a microcell base station mainly depends on the dynamic part (e.g., allocated transmit power and the number of allocated subcarriers). However, for a macrocell base station, the energy consumption is dominated by the static part and does not significantly depend on the transmission parameters of each user.
+On the other hand, the definition of ”throughput” also affects the accuracy of the bits-per-Joule metric. We should not include all the transmitted data into the throughput, since not all of the transmitted data are real information bits. For example, the header required in different protocols, signal- ing information, destroyed packets, and duplicate packets all present overhead bits. The energy consumption of training sequences for channel estimation in fading channels is con- sidered in [32], where it is shown that the optimal power allocation for pilot and data symbol in terms of EE can reduce transmit power consumption by 84.5% compared with optimal power allocation scheme for maximizing the capacity. In [24], throughput is defined as ”goodput” - the number of bits transmitted without error, to address this issue. Other research on the effect of protocol headers on energy consumption is introduced in [33], where the authors have reviewed some work on energy-efficient network protocol design, such as the impact of different TCP ² header options on the EE, and the effects of MAC/PHY layer overheads on the energy consumption.
+From the above discussions, we can gather the following conclusions:
+
+2TCP: Transmission Control Protocol, one of the core protocols of the Internet protocol suite.
+
+170                               IEEE COMMUNICATIONS SURVEYS & TUTORIALS, VOL. 15, NO. 1, FIRST QUARTER 2013
+
+
+1. Traditional energy-efficient technologies only consider the transmit power consumption and only make sense when the transmit power dominates the total energy consump- tion, such as for long-distance transmission [27], [29] and possibly for high data rate applications [28].
+2. A holistic and system-wide EE metric is imperative. This EE metric should include all the energy consumption such as transmission power, circuit power and signaling overhead in the entire network; and, tradeoffs must be made between them such that the energy savings in one part would not be counteracted by increased energy con- sumption in another part.
+However, EE is not the only figure of merit for designing wireless networks. Spectral efficiency, deployment cost, net- work coverage and QoS requirements (such as transmission rate and delay) are also important ’metrics’ that should be seriously considered. A detailed analysis and discussion on the fundamental tradeoffs among these metrics such as deployment efficiency vs EE, spectrum efficiency vs EE, bandwidth vs power, and delay vs power can be found in [9].
+
+III. Eɴᴇʀɢʏ-Eꜰꜰɪᴄɪᴇɴᴛ Rᴀᴅɪᴏ Rᴇꜱᴏᴜʀᴄᴇ Mᴀɴᴀɢᴇᴍᴇɴᴛ
+Energy-efficient radio resource management is one of the effective ways to reduce energy consumption of wireless systems. As observed in Table I, all of the listed projects on green networks give effective radio resource management a prominent role. In this section, we mainly focus on energy- saving under low-traffic loads and exploiting QoS require- ments for a variety of applications.
+
+A. Energy Saving for Low Traffic Loads
+Most current network dimensioning is peak-load oriented to satisfy the users’ QoS requirements. In fact, much previous work [5], [13], [34]–[36] shows that daily traffic loads at BSs vary widely over time and space. Thus, a lot of energy is wasted when the traffic load is low. Vendors and operators have already realized this problem and taken action. For instance, Alcatel-Lucent announced that a new feature of their software upgrades, called dynamic power save (DPS), can bring up to 27% power consumption reductions for BSs deployed by China Mobile [37]. Energy-saving solutions through cell-size breathing and sleep modes, based on traffic loads, have been proposed by the OPERA-Net project [13]. Optimal power-saving schemes using cell switch-off under a trapezoidal traffic pattern and a measured traffic pattern are analyzed in [38], where it is proved that a 25-30% energy saving is possible by simply switching off the active cells during the periods when their traffic is low. However, the effect of switch-off on coverage is not studied. In [36], a traffic-aware BS mode (active or sleeping) switching algorithm, based on a blocking probability requirement, is introduced. A minimum mode holding time is also suggested to avoid frequent BS mode switching. It is demonstrated that changing the holding time over a specified range will cause little performance change on either energy saving or blocking probability [36]. The impact of the mean and variance of the traffic load as well as the BS density on the energy saving strategy with BS switching is investigated in [34], which demonstrates that
+energy saving will increase with the BS density and the variance-to-mean ratio of the traffic load. In [39], some poten- tial approaches to make energy consumption of BSs scale with the traffic load across time, frequency, and spatial domains are presented. It is also shown that the maximum energy-saving gain can be achieved by jointly reconfiguring the bandwidth and the number of antennas and carriers according to the traffic load [39]. Similar energy-saving solutions based on user load variations on the terminal side are introduced in [40]. In [41], multi-RAT (multiple radio access technologies) is proposed by the EARTH [10] project to take the advantage of the dynamic distribution of the traffic load among different radio access interfaces.
+B. Service Differentiation
+Energy saving should not only exploit the traffic load vari- ations, but also the diversity of the QoS requirements. On the internet, the tradeoff between energy consumption and delay has been extensively studied. For cellular networks, on the other hand, because only limited service types (mainly voice communications) were available in the early systems (1G, 2G systems), little has been done. However, as mentioned above, with the evolution of cellular systems and the popularity of smart phones, such as the iPhone, more and more diverse applications will appear in cellular networks. In particular, some applications, such as video conferencing, web-based seminars, and video games, require real-time service; and other applications, such as email, and downloading files for offline processing, are delay tolerant. Hence, it is beneficial to differentiate the types of traffic and make the energy consumption scale with the traffic type.
+Recently, some researchers have exploited the service la- tency of applications to reduce the energy consumption in cellular networks. In [24], energy-efficient power and rate control with delay QoS constraints in CDMA-based systems using a game-theoretic approach is presented, where the delay constraint of a user is translated into a lower bound on the user’s output SIR (signal-to-interference ratio) requirement, and then the Pareto-dominant equilibrium solution is derived. The delay performance of users at the Nash equilibrium is also analyzed. Inspired by mobility-prediction-based transmission strategies, which are usually used in delay tolerant networks, a store-carry-and-forward (SCF), relay-aided cellular archi- tecture is proposed in [42], [43]. In the SCF scheme, when the application data is not delay sensitive, a user can first transmit the data to a mobile relay (for example, a vehicle) which carries the message close to the BS, and then the mobile relay retransmits the data to the BS. Numerical results in [43] show that, for delay insensitive services, a factor of more than 30 in energy savings can be obtained by SCF compared with direct transmission. The delay-power tradeoff and some open issues on this problem are also introduced in [9].
+C. Summary and Future Work
+In general, the two main findings from the discussion above are:
+1. The traffic loads at BSs vary widely over time and space [5], [13], [34]–[36], and load adaptive resource manage- ment (e.g. cell-size breathing [13], base station mode
+
+FENG et al.: A SURVEY OF ENERGY-EFFICIENT WIRELESS COMMUNICATIONS                                    171
+
+
+switching between active and sleeping [34], [36], [38], resource reconfiguring [37], [39]) can achieve significant energy saving.
+2. Exploiting the diversity of QoS requirements for different applications can save a significant amount of energy (e.g. SCF transmission for delay tolerant applications in [42], [43]).
+Existing research has shown that energy-efficient radio resource management can provide significant energy savings. However, several important issues are still open:
+1. The collaboration between neighboring cells should be further studied since the cell mode switching changes the coverage and handoff issues. The effect of these changes on EE should be evaluated.
+2. When the diversity of QoS requirements for different applications is exploited, a more general and practical QoS requirement model, as well as the fairness issues between users, should be considered. For instance, since both the channel condition and the traffic flow are time-varying in wireless networks, it is quite possible that a traffic flow has a higher transmission priority according to its QoS requirement, but the corresponding channel condition is bad. Thus, we should balance the EE gain based on the diversity of QoS requirements and the QoS requirements themselves.
+3. Since most existing work only considers time-domain so- lutions (cell mode switching) for energy-efficient radio re- source management, joint time-domain, frequency-domain (e.g. bandwidth allocation, cognitive radio and carrier aggregation) and spatial-domain (e.g. MIMO technology and directional antenna) solutions should be studied in the future.
+
+IV. Eɴᴇʀɢʏ-Eꜰꜰɪᴄɪᴇɴᴛ Nᴇᴛᴡᴏʀᴋ Dᴇᴘʟᴏʏᴍᴇɴᴛ Sᴛʀᴀᴛᴇɢɪᴇꜱ
+Network deployment strategies are always among the hot topics in cellular communications. However, early work in this area is mainly focused on network performance, such as coverage, spectral efficiency, and capacity [44], [45]. Re- cently, as energy consumption has become a primary concern, energy-efficient network deployment strategies have attracted increasing interest. The optimal cell size in terms of energy consumption is investigated in [9], [46], [47], where the tradeoff between EE and deployment cost is also discussed. Besides energy-efficient cell-size design, emerging heteroge- neous networks (mix of macrocells, microcells, picocells, and femtocells ³ ) and various relay and cooperative communica- tions are also worth considering. In the following, energy-
+³Macrocells provide the largest area of coverage within a cellular network and typically have a power output in tens of watts.
+Microcells provide additional coverage and capacity in areas where there are large numbers of users. The coverage is typically between 300 m and 1000
+m. They have lower output powers than macrocells, usually a few watts.
+Picocells provide localized coverage. They are normally installed and maintained directly by the network operator and deployed in the places with a dense population of users such as in airport terminals, train stations and shopping centers.
+Femtocellular BSs are typically self-installed by the end users to access the cellular network inside their homes over a broadband connection such as DSL, cable modem, etc.
+
+efficient deployment strategies for heterogeneous networks and relay and cooperative communications will be discussed.
+A. Heterogeneous Networks
+For energy efficiency, the optimal layout of microcells overlaying conventional macrocells is investigated in [48]– [51]. In particular, simple energy consumption models of different base-station types (pure macrocellular BSs, and a hybrid of macrocellular BSs and microcellular BSs) are provided in [48], where the energy consumption at the BS is modeled as the sum of the transmit-power dependent and independent parts, respectively. Specifically, the energy consumption of the PA, the feeder loss, and the extra loss in transmission-related cooling, which scale linearly with the average radiated power, are considered as the transmit- power dependent part; the circuit power for signal processing, battery backup, site cooling consumption, etc. account for the transmit-power independent part. The impact of inter-site distance and the average number of micro-sites per macrocell on area power consumption is also addressed in [48]. The extended work in [49] evaluates the potential energy reduction with varying numbers of micro-sites and macrocell size to achieve the required spectral efficiency targets under full-load conditions. It is shown in [49] that deployment of micro- sites can significantly decrease the area power consumption in the network while still achieving specified area throughput targets. In [50], [51], the area power consumption and area spectral efficiency of homogeneous macro-sites, homogeneous micro-sites, and heterogeneous networks are compared. It is found that, for higher area throughput targets and higher user densities, deploying additional micro-sites is beneficial for EE. Picocells and femtocells are also promising deployment strategies to provide cost-effective services. Picocells and femtocells are usually installed within buildings for better indoor coverage. Indoor picocells and femtocells bring re- ceivers closer to the transmitters and effectively reduce the penetration loss and path loss; thus, energy consumption can be significantly reduced. According to [52], the total network energy consumption in urban areas for high-data- rate user demand can be reduced by up to 60% with user- deployed residential picocells. It is also demonstrated in
+[53]–[55] that the achievable gain in system EE with the deployment of femtocells in existing macrocells is significant due to the smaller path loss, lower transmit power, and hence lower energy requirement. In [56], user activity detection is considered to improve the EE of femtocellular BSs, which allows the femtocellular BS to completely switch off its radio transmission and associated processing when it is not involved in an active call. In [57], a new Wireless-over-Cable architecture for femtocells is proposed as a green solution. A detailed description of femtocellular networks from both the technical and business aspects can be found in [58], where the challenges of implementing these networks and some potential research opportunities are also introduced. It is indicated in [58] that femtocellular networks must deal with additional timing and synchronization, as well as interference management issues, which cause more signaling overhead and potentially more energy consumption. Thus, how to design energy-efficient femtocellular networks is still an open issue.
+
+172                               IEEE COMMUNICATIONS SURVEYS & TUTORIALS, VOL. 15, NO. 1, FIRST QUARTER 2013
+
+
+Coordinated Multi-Point (CoMP) transmission technology, which divides the traditional base station into a baseband unit (BBU) part and remote radio unit (RRU) parts, has been proposed to expand cell coverage and improve the throughput of cell-edge users. The BBU and the RRU parts are connected via optical fiber. The BBU part is in charge of radio resource and network management issues and can provide joint processing for its RRU parts. Each RRU is equipped with a transceiver device and can bring the user closer to the antennas of base stations. Thus, CoMP can be used to reduce the system transmission power consumption. The optimal RRU distribution from the perspective of EE is studied in [59], where minimizing the average transmission power is assumed to be equal to minimizing the average minimum access distance between the user and the nearest RRU. Based on this assumption, the optimal RRU locations, which are a complicated function of the number of RRUs and the radius of the cell, is derived. With the optimal RRU locations, the uplink transmission power can be greatly reduced compared with a traditional centralized antenna system. For instance, when the number of RRUs is 6, the total uplink transmission power can be decreased by about 14 dB.
+Recently, a new cellular architecture aiming at minimizing radiation from user terminals is proposed in [60], where it is called ’Green Cellular’ to distinguish itself from traditional architectures by equipping a specially dubbed ’green antenna’ at each transceiver BS. Similar to the principle of femtocells, in green cellular architectures, a mobile user near the green antenna could transmit at a lower transmit power, not only reducing its own power consumption, but also generating less interference to other users. Moreover, the green antennas do not produce any additional radiation, since only uplink traffic is relayed. Thus, green antennas are suitable for schools, hospitals, etc. Simulation results in [61] show a significant reduction, by a factor of 10-10000, in emission power and exposure to radiation.
+
+B. Relay and Cooperative Communications
+Relay and cooperative networks are also promising archi- tectures to improve EE. Relay networks save energy in two ways: reducing path loss due to the shorter transmission range and potentially generating less interference due to the low transmission power. The results in [62] show that transmission with relays can reduce energy consumption in CDMA cellular networks; and the higher the path loss exponent, the more energy that can be saved. Power control can further reduce energy consumption. The advantages of relay transmission are examined in [25], where the transmission delay and energy consumption of relay nodes are both considered. In [63], the tradeoff between total energy consumption and end-to-end communication rate in AWGN relay channels is analyzed, where the impact of the hop number, node locations, allocated power and data rate of each hop on EE is also studied.
+Different from pure relay systems, each cooperative node in cooperative communications acts as both an information source and a relay. Inherently, energy savings in cooperative networks come from the diversity that results from coopera- tion. Since a relay node usually has a several-wavelength long
+distance to the source node, the relay channel experiences fading conditions independent of that on the direct channel between the source and destination. Hence, we can exploit the channel diversity for potential energy savings. It is shown in
+[29] that, at a short distance, direct communication is preferred over distributed space-time coding since adding more energy consumption from using relays counters the transmission en- ergy saving from cooperative diversity. However, the results in
+[29] also demonstrate that the energy efficiency of cooperative communication can be improved by optimizing the constella- tion size for different transmission distances and outperform direct communication. Similarly, the research results in [64],
+[65] also show the optimal constellations in terms of EE are decreasing with transmission distances, where the energy efficiency of cooperative transmission using different MQAM schemes is investigated by jointly considering transmit, cir- cuit, and retransmission power. It is found in [66] that the single-best relay selection scheme with physical layer power allocation and the RTS/CTS ⁴ based MAC-layer can achieve higher EE compared with multiple relays. In the paper, two power control strategies are also introduced: minimizing en- ergy consumption per data packet, or maximizing the network lifetime. It is shown that with the two power control schemes, the single best relay selection scheme can outperform direct communication and prolong the network lifetime. An energy- efficient clustered wireless sensor network is studied in [67]. In this paper, multiple relay nodes which correctly decode the broadcast message from the source, participate in relaying data packets using space-time coding. The optimal power allocation for intra-cluster and inter-cluster transmissions is derived and the effect of the number of relay nodes in the cluster, the average PER (Packet Error Rate) constraint, and the distance between clusters is investigated. The proposed schemes significantly improve the energy savings compared with direct communication.
+Another very popular technique- network coding- has also been used to implement cooperative communication. Network coding based two-way relay schemes with decoding (decode- and-forward) and without decoding (amplify-and-forward, denoise-and-forward, compress-and-forward) are introduced and described in detail in Chapter 11 of [68]. In these approaches, relay nodes first encode the received packets from different traffic flows into one packet and then forward the encoded packets to neighbors, instead of forwarding each packet individually. This leads to fewer transmissions, and thus potentially reduces energy consumption. The research work in
+[69] shows that the potential gain of network coding in terms of EE is upper bounded by a factor of 3. In [70], a network- coding-based cooperative diversity scheme in OFDMA wire- less networks called ’XOR-CD’ is proposed; the results show that ’XOR-CD’ can improve the energy efficiency by over 100% compared with conventional cooperative schemes. How- ever, the gain from network coding is closely related to that from exploiting traffic patterns, scheduling strategies, network topology, and so on. Hence, energy-efficient network design through network-coding-based cooperation is worth
+
+4RTS/CTS: Request To Send/Clear To Send, a handshaking protocol in IEEE 802.11.
+
+FENG et al.: A SURVEY OF ENERGY-EFFICIENT WIRELESS COMMUNICATIONS                                    173
+
+
+further study. For both relay and cooperative communications, it is not easy to choose the optimal partners and allocate appropriate resources among them to achieve energy savings. Some previous works on this issue, as well as some open issues, are given in [71].
+
+C. Summary and Future Work
+In summary, the main findings of this section are as follows:
+1. A well-deployed heterogeneous network will not only bring better performance on coverage and capacity but also higher energy-efficiency. For example, the energy-efficient layout of micro-sites [48]–[51], picocells and femtocells [52]–[58], and CoMP technology [59] as well as the new cellular architecture dubbed ’Green Cellular’ [60], [61] have shown significant energy-efficiency improvement.
+2. With adaptive packet scheduling and resource allocation, relay and cooperative communications [62]–[67], [69], [70] can be used to improve the EE. In particular, network coding technology has shown great potential for energy saving [69].
+Although much work on energy efficient network deploy- ment strategies has been done, current results are still quite preliminary and some challenges remain to be investigated, for instance:
+1. The interference management and handoff strategies in heterogeneous networks with respect to EE are important topics for further study. Since there will be more transmitter sources and access points with heterogeneous deployment, there is the potential for more interference and more frequent handoffs.
+2. The tradeoff between EE and channel state information (CSI) overhead in relay and cooperative communications also needs more investigation. As indicated above, for the optimal resource allocation and best relay node selection in relay and cooperative communications, CSI is indis- pensable. On the other hand, acquiring CSI will consume additional energy. Thus, there exists a tradeoff between EE and CSI overhead.
+
+V. MIMO, OFDMA ᴀɴᴅ Cʀᴏꜱꜱ-Lᴀʏᴇʀ Dᴇꜱɪɢɴ ꜰᴏʀ
+Eɴᴇʀɢʏ Eꜰꜰɪᴄɪᴇɴᴄʏ
+Both MIMO and OFDM are key techniques in current 3G and future 4G wireless systems, such as Worldwide Inter- operability for Microwave Access (WiMAX) and the Third Generation Partnership Project (3GPP) Long Term Evolution (LTE). Previous research on MIMO and OFDM mainly aims to increase network capacity or spectral efficiency, but rarely concerns energy consumption. Thus, how to design energy- efficient schemes with MIMO and OFDM is highly interesting and important. In this section, we will provide an overview on the state of the art on this issue, along with cross-layer optimization strategies for energy-efficient wireless networks.
+
+A. MIMO
+MIMO can provide diversity gain and multiplexing gain. Particularly, diversity gain is achieved by sending signals that carry the same information through different paths between
+
+transmit antennas and receiver antennas. Multiplexing gain can be obtained by transmitting independent information streams in parallel through the spatial channels. Both help increase network throughput and reduce energy consumption. In [72], the impact of diversity gain and multiplexing gain on EE of MIMO transmission in wireless sensor networks is in- vestigated. With MIMO transmission, more antenna devices will consume more circuit power. Therefore, MIMO is not always more energy-efficient than single-input and single- output (SISO). An energy consumption model of MIMO in
+[29] considers all signal processing blocks at the transmitter and the receiver. Based on this model, the relationship between energy consumption and transmission distance with SISO, SIMO and MIMO is investigated. It is shown that, at a short distance, SISO may outperform MIMO in EE because circuit energy consumption dominates the total energy demand.
+The tradeoff between circuit power and transmission power consumption to obtain higher EE in MIMO systems is also discussed in [28], where the optimal MIMO mode with a required transmission rate is given. In a similar context, the adaptive MIMO switching strategy based on the available CSI, proposed in [73], can achieve up to a 30% improvement in link energy efficiency. In [74], cooperative MIMO and data aggregation techniques are combined to reduce the energy consumption in wireless sensor networks; this is accomplished by reducing the amount of transmitted data and by better allocating resources through cooperation. The problem of energy-efficient MIMO precoding is considered for a point-to- point communication system with multiple antenna terminals in [75]. In [76], power allocation in wireless ad hoc networks is structured as a non-cooperative game to maximize EE; and, a link shut-down mechanism is proposed to reduce co-channel interference and improve EE.
+In many practical systems, user terminals are usually equipped with only one antenna. Thus, traditional MIMO cannot be implemented. To overcome the limitation, multi- user MIMO (MU-MIMO), also called virtual MIMO, has been proposed. In MU-MIMO, multiple users cooperate for distributed transmission and information processing. Thus, local information exchange is indispensable for MU-MIMO. This causes additional energy consumption compared with traditional single-user MIMO (SU-MIMO). This issue has been studied in [29], [77], [78]. It is proved that, even when the local energy consumption for cooperation is considered, MU-MIMO is still more energy-efficient than SISO over a certain transmission distance. It is also shown that optimizing the constellation size can further increase EE.
+For both SU-MIMO and MU-MIMO, knowledge of the CSI is required. However, most of the mentioned work ignores the energy consumption of CSI signaling information. Thus, when the energy consumption of signaling information is considered, there may exist tradeoff between the CSI accuracy and total energy efficiency.
+
+B. OFDMA
+Orthogonal frequency division multiple access (OFDMA) will be the dominant multiple access scheme for next gen- eration wireless networks since both of the two accepted 4G
+
+174                               IEEE COMMUNICATIONS SURVEYS & TUTORIALS, VOL. 15, NO. 1, FIRST QUARTER 2013
+
+
+standards (Long Term Evolution-Advanced and 802.16m) have adopted OFDMA as the multiple access technology. OFDMA is distinguished by its simplicity and high spectral efficiency. In this approach, multiple access is achieved by allocating different sets of orthogonal subcarriers to different users. The benefit is that subcarriers can be adaptively allocated to the users that experience high SNR. Hence, system capacity can be greatly increased. This is also known as multi-user diversity.
+Obviously, in OFDMA systems, multi-user diversity can be exploited not only to increase network capacity but also to reduce energy consumption. When a ”good” channel is allocated to the corresponding user, the transmit power can be drastically decreased. Based on the above observation, an optimal subcarrier, bit, and power allocation algorithm minimizing the total transmit power is studied in [79]. The optimal resource allocation scheme is shown to reduce the transmit power by about 5-10 dB compared with conventional schemes if circuit energy consumption is not considered. In [80], the impact of transmission rate, transmit energy and circuit energy consumption as well as channel gain on the EE in OFDMA systems is analyzed, where flat fading channels are considered. It is proved that, for a given channel gain and constant circuit energy consumption, there exists a unique globally optimal transmission rate in terms of EE. It is also proved that EE increases with the channel gain and the number of subchannels, while decreasing with the circuit energy consumption. Based on these observations, the authors further propose energy-efficient link adaptation (rate and corresponding transmit power) and resource allocation (subcarriers) scheme for OFDMA systems. Simulation results show that the EE scheduler performs approximately 50% better than a round-robin scheduler in terms of EE. The work is later extended to the case of frequency-selective channels in [81]–[83]. Specifically, in [81], [82], an energy-efficient water-filling power allocation scheme is proposed, where it is proved that the maximal EE can be achieved by adapting both overall transmit power and its allocation according to the channel states and the circuit energy consumption. In [83], a closed-form solution of energy-efficient link adapta- tion is obtained with a time-averaged bits-per-Joule metric, where it is shown that this scheme can achieve almost the same performance as the global optimum which is obtained by exhaustive search, and with much less complexity. An energy-efficient link adaptation strategy for MIMO-OFDM- based wireless communications is presented in [84], where the optimal mode is chosen to maximize EE with QoS constraint. In OFDMA systems, fairness among users is an impor- tant design standard. Adaptive resource allocation without considering fairness may cause poor service to some users since resource is always distributed to users with relatively high channel gains. Hence, when adaptive strategies are used to maximize energy efficiency, fairness should be taken into account. The fairness issue is considered in [80], [83], where a geometric-mean metric is proposed to guarantee that the subchannels are allocated to maximize the geometric average
+of the energy efficiency of all the users.
+Note that in the above discussion, the energy consumption of the signaling overhead is not considered. On the other hand,
+for an adaptive scheme, accurate CSI is imperative. Thus, the effect of signaling overhead on energy-efficient OFDMA design should be further studied. Additionally, when relay strategies are used in an OFDMA system, energy-efficient resource allocation may become more intricate; this will also require further investigation.
+
+C. Cross-layer Optimization
+As indicated in [25], [85], cross-layer design is another prominent approach to reduce energy consumption. The design requirements for energy efficiency across the link, medium access, network and application layers have been investigated in [85]. A comprehensive discussion of energy-efficient cross- layer design in the time, frequency, and spatial domains, as well as details related to energy-efficient hardware implemen- tations are provided in [25]. It is shown that, because each layer of the protocol stack has an inherent interdependence on other layers, cross-layer strategies can significantly improve EE through adaptive transmission and resource allocation schemes corresponding to service, traffic, and environment dynamics. From the previously discussed strategies, it is also easy to see that cross-layer design plays a key role in reducing the holistic energy consumption, especially for networks with MIMO and OFDMA transmission schemes.
+Cross-layer design from a system-wide perspective brings low design margins. At the same time, it also leads to higher algorithm complexity. As a result, significant computational overhead is expected to obtain the optimal solution. From
+[86] the margin adaptive optimization problem, which aims at minimizing the overall transmitting power of users with individual rate constraints in realistic OFDMA systems, is NP-hard. Moreover, three suboptimal approaches (relaxation constraint, problem splitting, and heuristics) have been pro- posed in [86] to obtain nearly optimal solutions. Obviously, the cross-layer optimization also should consider signaling overhead.
+
+D. Summary and Future Work
+This section reviewed the state of the art on energy- efficient MIMO and OFDMA schemes as well as cross-layer optimization design. The main findings include:
+1. Adaptive MIMO mode switching is helpful to improve EE. For instance, the MIMO mode switching strategies based on transmission rate [28], transmission distance [29], and channel state information [73] have shown considerable energy saving.
+2. Utility-based energy-efficient design in OFDMA systems [80]–[83] can significantly improve EE.
+3. Cross-layer optimization is imperative for achieving the most energy-efficient wireless network design [25], [85], [86].
+Although a large number of recent papers have focused on energy-efficient MIMO and OFDMA as well as cross-layer optimization design, there are still many problems that need additional study, for instance,
+1. The energy-efficient MIMO and OFDMA schemes in multi-cell scenarios need to be further investigated. Most
+
+FENG et al.: A SURVEY OF ENERGY-EFFICIENT WIRELESS COMMUNICATIONS                                    175
+TABLE II
+Tᴇᴄʜɴɪǫᴜᴇꜱ ᴄᴀᴛᴇɢᴏʀɪᴢᴀᴛɪᴏɴ ʙᴀꜱᴇᴅ ᴏɴ ᴛʜᴇɪʀ ʀᴇʟᴇᴠᴀɴᴛ ᴛᴏ BS ꜱɪᴛᴇ, Tᴇʀᴍɪɴᴀʟ ꜱɪᴛᴇ ᴏʀ Nᴇᴛᴡᴏʀᴋ
+
+Techniques
+Relevant to
+Base Station site          Terminal site
+Network
+
+Power Saving for Low Traffic Loads
+[34-41] only BS site
+Not introduced in this paper          -
+
+Service Differentiation
+[42,43] both BS site and Terminal site                 -
+
+
+Heterogeneous Networks
+Relay and Cooperative Communications
+
+MIMO
+
+
+
+OFDMA
+
+[44-61] Network architecture design
+[62-71] both BS site and Terminal site                 - [72,73,75] both BS site and Terminal site
+-
+-         [28,29,74,76-78] only Terminal site
+[81,82,84] both BS site and Terminal site
+-
+[32,79] only BS site      [80,83] only Terminal site
+
+
+Cross-layer Design
+Both Base Station site and Terminal site [25,85,86]              -
+
+
+
+existing work only considers the single cell scenarios. The EE performance of MIMO and OFDMA schemes for inter- cell interference in multi-cell scenarios are not clear.
+2. The energy-efficient resource allocation in OFDMA sys- tems with relay strategies also needs to be addressed. When relay strategies are used in OFDMA systems, energy- efficient resource allocation may become more compli- cated. However, both relay systems and OFDMA are among the key technologies in LTE-Advanced, thus this issue warrant further study.
+3. The complexity-performance tradeoff in cross-layer opti- mization design for energy-efficient networks should be considered as well. Cross-layer optimization can bring low design margin and potential better performance; however, it can also accrue larger overhead. Thus, study is required to find effective but simple schemes to reach the design goal.
+
+VI. Cᴏɴᴄʟᴜꜱɪᴏɴ
+In this article, we outlined the technical roadmaps of several major international projects for energy-efficient wireless net- works, and discussed the state-of-the-art research on energy- efficient wireless networks. EE metric, network deployment strategies, energy-efficient network resource management, various relay and cooperative communications, MIMO and OFDM technologies, as well as cross-layer optimizations for developing energy-efficient wireless networks were intro- duced.
+For readers to easily find interesting references which have been presented in this paper, we have split the techniques discussed into those relevant to the base station site, those relevant to the terminal site, and those relevant to the network. Table II shows this partitioning.
+Previous research shows that optimized energy-efficient design (including network deployment, transmission scheme and resource management) could significantly reduce the en- ergy consumption of the entire network. Nevertheless, current
+research results are still quite preliminary and many challenges remain.
+
+Aᴄᴋɴᴏᴡʟᴇᴅɢᴍᴇɴᴛ
+This work is supported by the National Basic Research Program of China (973 Program) Grant No.2012CB316003 and the National Science Foundation (NSF) under Grant No. 1017192 and No. 1017053. The authors would like to thank the anonymous reviewers as well as the Associate Editor for their excellent feedback, which greatly improved the quality and readability of this paper. The authors also thank to Cong Xiong and Zhikun Xu for their valuable comments.
+
+Rᴇꜰᴇʀᴇɴᴄᴇꜱ
+
+[1] http://www.cwc.oulu.fi/workshops/W-Green2008.pdf, 2008.
+[2] Laurent He´rault, “Holistic approach for future energy efficient cellular networks,” CEA-LETI, 11th Leti Annual Review, June 2009.
+[3] T. Edler and S. Lundberg, “Energy efficiency enhancements in radio access networks,” Ericsson, Ericsson Review, 2004.
+[4] “Improving energy efficiency, Lower CO₂ emission and TCO,” Whitepaper, Huawei energy efficiency solution, Huawei Technologies, 2010.
+[5] P. Grant, MCVE Core 5 Programme, “Green radio -the case for more efficient cellular basestations,” presented at the Globecom’10, 2010.
+[6] D. Lister, Vodafone Group Research & Development, “An operator’s view on green radio,” presented at the Proc. IEEE Int. Workshop on Green Communications, 2009.
+[7] 2010 wireless smartphone customer satisfaction study, J.D. Power and Associates, 2010, http://www.jdpower.com/Electronics/ratings/ Wireless-Smartphone-Ratings-(Volume-1)/.
+[8] http://zdc.zol.com.cn/201/2019387.html, 2010.
+[9] Y. Chen, S. Zhang, S. Xu, and G. Y. Li, “Fundamental trade-offs on green wireless networks,” IEEE Commun. Mag., vol. 49, no. 6, pp. 30– 37, 2011.
+[10] EARTH, “Energy aware radio and network technologies project,” https://www.ict-earth.eu/default.html.
+[11] “Most promising tracks of green network technologies,” INFSO-ICT- 247733 EARTH Deliverable D3.1, Earth, WP3-Green Networks, 2010, https://bscw.ict-earth.eu/pub/bscw.cgi/d31509/EARTH WP3 D3.1.pdf.
+[12] OPERA-Net, “Optimising power efficiency in mobile radio networks project,” http://opera-net.org/default.aspx.
+
+176                               IEEE COMMUNICATIONS SURVEYS & TUTORIALS, VOL. 15, NO. 1, FIRST QUARTER 2013
+
+
+[13] “Optimising  power  efficiency  in  mobile  radio  networks,” OPERA-Net  PROJECT  STAND  #  42,  2010  NEM  Summit
+Towards Future Media Internet,  Barcelona,Spain,  Oct 2010, http://opera-net.org/Documents/5026v1 Opera-Net e-NEM% 20Event%20Barcelona%202010 Demos%20Presentation 290710.pdf.
+[14] Wireless@KTH, “ewin: Energy-efficient wireless networking,” http:
+//www.wireless.kth.se/research/projects/19-ewin.
+[15] “Energy  efficiency  enhancements  in  radio  access  networks,” Wireless@KTH  Research  Strategy  Document  2008-2010, Wireless@KTH,  2008,  http://www.wireless.kth.se/images/stories/ Strategy/Research plan08.pdf.
+[16] H. Kwon and T. Birdsall, “Channel capacity in bits per joule,” IEEE J. Ocean. Eng., vol. 11, no. 1, pp. 97–99, 1986.
+[17] R. Gallager, “Energy limited channels: Coding, multiaccess, and spread spectrum,” in Proc. Conf. Inform. Sci. and Syst., 1987.
+[18] S. Verdu, “On channel capacity per unit cost,” IEEE Trans. Inf. Theory, vol. 36, no. 5, pp. 1019–1030, 1990.
+[19]   , “Spectral efficiency in the wideband regime,” IEEE Trans. Inf. Theory, vol. 48, no. 6, pp. 1319–1343, 2002.
+[20] V. Rodoplu and T. H. Meng, “Bits-per-joule capacity of energy-limited wireless networks,” IEEE Trans. Wireless Commun., vol. 6, no. 3, pp. 857–865, 2007.
+[21] F. Meshkati, H. V. Poor, S. C. Schwartz, and N. B. Mandayam, “An energy-efficient approach to power control and receiver design in wireless data networks,” IEEE Trans. Commun., vol. 53, no. 11, pp. 1885–1894, 2005.
+[22] D. Goodman and N. Mandayam, “Power control for wireless data,” IEEE Personal Commun., vol. 7, no. 2, pp. 48–54, 2000.
+[23] C. Saraydar, N. Mandayam, and D. Goodman, “Efficient power control via pricing in wireless data networks,” IEEE Trans. Commun. , vol. 50, no. 2, pp. 291–303, 2002.
+[24] F. Meshkati, H. Poor, S. Schwartz, and R. Balan, “Energy-efficient resource allocation in wireless networks with quality-of-service con- straints,” IEEE Trans. Commun. , vol. 57, no. 11, pp. 3406–3414, 2009.
+[25] G. Miao, N. Himayat, Y. Li, and A. Swami, “Cross-layer optimization for energy-efficient wireless communications: a survey,” Wireless Com- munications and Mobile Computing, vol. 9, no. 4, pp. 529–542, 2009.
+[26] J. Proakis, Digital Communications, 4th ed. New York: McGraw-Hill, 2001.
+[27] S. Cui, A. Goldsmith, and A. Bahai, “Energy-constrained modulation optimization,” IEEE Trans. Wireless Commun. , vol. 4, no. 5, pp. 2349– 2360, 2005.
+[28] H. Kim, C. Chae, G. De Veciana, and R. Heath, “A cross-layer approach to energy efficiency for adaptive mimo systems exploiting spare capacity,” IEEE Trans. Wireless Commun. , vol. 8, no. 8, pp. 4264–4275, 2009.
+[29] S. Cui, A. Goldsmith, and A. Bahai, “Energy-efficiency of mimo and cooperative mimo techniques in sensor networks,” IEEE J. Sel. Areas Commun., vol. 22, no. 6, pp. 1089–1098, 2004.
+[30] G. Miao, N. Himayat, and G. Li, “Energy-efficient link adaptation in frequency-selective channels,” IEEE Trans. Commun. , vol. 58, no. 2,
+pp. 545–554, 2010.
+[31] O. Arnold, F. Richter, G. Fettweis, and O. Blume, “Power consumption modeling of different base station types in heterogeneous cellular networks,” in Future Network and Mobile Summit, 2010. IEEE, 2010,
+pp. 1–8.
+[32] Z. Xu, C. Li, G. andYang, S. Zhang, Y. Chen, and S. Xu, “Energy- efficient power allocation for pilots in training based downlink ofdma systems,” IEEE Trans. Commun., Apr 2011, submitted to.
+[33] Y. Xiao, P. Savolainen, A. Karppanen, M. Siekkinen, and A. Yla¨- Ja¨a¨ski, “Practical power modeling of data transmission over 802.11 g for wireless applications,” in Proc. 1st International Conference on Energy- Efficient Computing and Networking. ACM, 2010, pp. 75–84.
+[34] E. Oh and B. Krishnamachari, “Energy savings through dynamic base station switching in cellular wireless access networks,” in GLOBECOM 2010, 2010 IEEE Global Telecommunications Conference. IEEE, 2010,
+pp. 1–5.
+[35] D. Willkomm, S. Machiraju, J. Bolot, and A. Wolisz, “Primary users in cellular networks: A large-scale measurement study,” in New Frontiers in Dynamic Spectrum Access Networks, 2008. DySPAN 2008. 3rd IEEE Symposium on. IEEE, 2008, pp. 1–11.
+[36] J. Gong, S. Zhou, Z. Niu, and P. Yang, “Traffic-aware base station sleeping in dense cellular networks,” in Quality of Service (IWQoS), 2010 18th International Workshop on. IEEE, 2010, pp. 1–2.
+[37] Alcatel-Lucent, “Alcatel-lucent demonstrates up to 27 percent power consumption reduction on base stations deployed by china mobile : Software upgrades can offer exceptional power and cost savings for
+mobile operators worldwide,” presented at the Mobile World Congres, Barcelona, Spain, Feb 2009.
+[38] M. Marsan, L. Chiaraviglio, D. Ciullo, and M. Meo, “Optimal energy savings in cellular access networks,” in IEEE International Conference on Communications Workshops, 2009, pp. 1–5.
+[39] T. Chen, H. Zhang, Z. Zhao, and X. Chen, “Towards green wireless access networks,” in Communications and Networking in China (CHI- NACOM), 2010 5th International ICST Conference on.  IEEE, 2010,
+pp. 1–6.
+[40] X. Ge, C. Cao, M. Jo, M. Chen, J. Hu, and I. Humar, “Energy efficiency modelling and analyzing based on multi-cell and multi-antenna cellular networks,” KSII Transactions on Internet and Information Systems, vol. 4, no. 4, pp. 560–574, 2010.
+[41] G. Auer, I. Go´dor, L. He´vizi, M. Imran, J. Malmodin, P. Fazekas,
+G. Biczo´k, H. Holtkamp, D. Zeller, O. Blume et al., “Enablers for energy efficient wireless networks,” in Vehicular Technology Conference Fall (VTC 2010-Fall), 2010 IEEE 72nd. IEEE, 2010, pp. 1–5.
+[42] P. Kolios, V. Friderikos, and K. Papadaki, “Ultra low energy store- carry and forward relaying within the cell,” in Vehicular Technology Conference Fall (VTC 2009-Fall), 2009 IEEE 70th.  IEEE, 2009, pp. 1–5.
+[43]   , “Store carry and forward relay aided cellular networks,” in Proc. seventh ACM international workshop on VehiculAr InterNETworking. ACM, 2010, pp. 71–72.
+[44] M. Alouini and A. Goldsmith, “Area spectral efficiency of cellular mobile radio systems,” IEEE Trans. Veh. Technol., vol. 48, no. 4, pp. 1047–1066, 1999.
+[45] S. Hanly and R. Mathar, “On the optimal base-station density for cdma cellular networks,” IEEE Trans. Commun. , vol. 50, no. 8, pp. 1274– 1281, 2002.
+[46] Y. Chen, S. Zhang, and S. Xu, “Characterizing energy efficiency and deployment efficiency relations for green architecture design,” in Communications Workshops (ICC), 2010 IEEE International Conference on. IEEE, 2010, pp. 1–5.
+[47] B. Badic, T. O’Farrrell, P. Loskot, and J. He, “Energy efficient radio access architectures for green radio: Large versus small cell size deployment,” in Vehicular Technology Conference Fall (VTC 2009-Fall), 2009 IEEE 70th. IEEE, 2009, pp. 1–5.
+[48] F. Richter, A. Fehske, and G. Fettweis, “Energy efficiency aspects of base station deployment strategies for cellular networks,” in Vehicular Technology Conference Fall (VTC 2009-Fall), 2009 IEEE 70th. IEEE, 2009, pp. 1–5.
+[49] A. Fehske, F. Richter, and G. Fettweis, “Energy efficiency improvements through micro sites in cellular mobile radio networks,” in GLOBECOM Workshops, 2009 IEEE. IEEE, 2009, pp. 1–5.
+[50] F. Richter, A. Fehske, P. Marsch, and G. Fettweis, “Traffic demand and energy efficiency in heterogeneous cellular mobile radio networks,” in Vehicular Technology Conference (VTC 2010-Spring), 2010 IEEE 71st. IEEE, 2010, pp. 1–6.
+[51] F. Richter and G. Fettweis, “Cellular mobile network densification utilizing micro base stations,” in Communications (ICC), 2010 IEEE International Conference on. IEEE, 2010, pp. 1–6.
+[52] H. Claussen, L. Ho, and F. Pivit, “Effects of joint macrocell and residential picocell deployment on the network energy efficiency,” in Personal, Indoor and Mobile Radio Communications, 2008. PIMRC 2008. IEEE 19th International Symposium on.  IEEE, 2008, pp. 1– 6.
+[53] F. Cao and Z. Fan, “The tradeoff between energy efficiency and system performance of femtocell deployment,” in Wireless Communication Systems (ISWCS), 2010 7th International Symposium on. IEEE, 2010,
+pp. 315–319.
+[54] Y. Hou and D. Laurenson, “Energy efficiency of high qos heterogeneous wireless communication network,” in Vehicular Technology Conference Fall (VTC 2010-Fall), 2010 IEEE 72nd. IEEE, 2010, pp. 1–5.
+[55] M. Jada, M. Hossain, J. Hamalainen, and R. Jantti, “Impact of femto- cells to the wcdma network energy efficiency,” in Broadband Network and Multimedia Technology (IC-BNMT), 2010 3rd IEEE International Conference on. IEEE, 2010, pp. 305–310.
+[56] I. Ashraf, L. Ho, and H. Claussen, “Improving energy efficiency of femtocell base stations via user activity detection,” in Wireless Com- munications and Networking Conference (WCNC), 2010 IEEE. IEEE, 2010, pp. 1–5.
+[57] J. Gambini and U. Spagnolini, “Wireless over cable for energy-efficient femtocell systems,” in GLOBECOM Workshops (GC Wkshps), 2010 IEEE. IEEE, 2010, pp. 1464–1468.
+[58] V. Chandrasekhar, J. Andrews, and A. Gatherer, “Femtocell networks: a survey,” IEEE Commun. Mag., vol. 46, no. 9, pp. 59–67, 2008.
+
+FENG et al.: A SURVEY OF ENERGY-EFFICIENT WIRELESS COMMUNICATIONS                                    177
+
+
+
+[59] C. Zhang, T. Zhang, Z. Zeng, L. Cuthbert, and L. Xiao, “Optimal locations of remote radio units in comp systems for energy efficiency,” in Vehicular Technology Conference Fall (VTC 2010-Fall), 2010 IEEE 72nd. IEEE, 2010, pp. 1–5.
+[60] D. Ezri and S. Shilo, “Green cellular-optimizing the cellular network for minimal emission from mobile stations,” in Microwaves, Communica- tions, Antennas and Electronics Systems, 2009. COMCAS 2009. IEEE International Conference on. IEEE, 2009, pp. 1–5.
+[61] D. Ezri, S. Shilo, B. Benmoshe, and E. Berliner, “Performance study of green cellular-an architecture for minimal emission from mobile sta- tions,” in Personal Indoor and Mobile Radio Communications (PIMRC), 2010 IEEE 21st International Symposium on. IEEE, 2010, pp. 2769– 2774.
+[62] A. Radwan and H. Hassanein, “Nxg04-3: Does multi-hop communica- tion extend the battery life of mobile terminals?” in Global Telecommu- nications Conference, 2006. GLOBECOM’06. IEEE. IEEE, 2006, pp. 1–5.
+[63] C. Bae and W. Stark, “End-to-end energy–bandwidth tradeoff in mul- tihop wireless networks,” IEEE Trans. Inf.Theory, vol. 55, no. 9, pp. 4051–4066, 2009.
+[64] Q. Chen and M. Gursoy, “Energy efficiency analysis in amplify-and- forward and decode-and-forward cooperative networks,” in Wireless Communications and Networking Conference (WCNC), 2010 IEEE. IEEE, 2010, pp. 1–6.
+[65]   , “Energy-efficient modulation design for reliable communication in wireless networks,” in Information Sciences and Systems, 2009. CISS 2009. 43rd Annual Conference on. Ieee, 2009, pp. 811–816.
+[66] Z. Zhou, S. Zhou, J. Cui, and S. Cui, “Energy-efficient cooperative communication based on power control and selective single-relay in wireless sensor networks,” IEEE Trans. Wireless Commun. , vol. 7, no. 8,
+pp. 3066–3078, 2008.
+[67] Z. Zhou, S. Zhou, S. Cui, and J. Cui, “Energy-efficient cooperative communication in a clustered wireless sensor network,” IEEE Trans. Veh. Technol., vol. 57, no. 6, pp. 3618–3628, 2008.
+[68] V. Tarokh, New directions in wireless communications research. Springer Verlag, 2009.
+[69] J. Liu, D. Goeckel, and D. Towsley, “Bounds on the gain of network coding and broadcasting in wireless networks,” in INFOCOM 2007. 26th IEEE International Conference on Computer Communications. IEEE. IEEE, 2007, pp. 724–732.
+[70] H. Xu and B. Li, “Xor-assisted cooperative diversity in ofdma wireless networks: optimization framework and approximation algorithms,” in INFOCOM 2009, IEEE. IEEE, 2009, pp. 2141–2149.
+[71] G. Y. Li, Z. Xu, C. Xiong, C. Yang, S. Zhang, Y. Chen, and S. Xu, “Energy-efficient wireless communications: tutorial, survey, and open issues,” IEEE Wireless Commun. Mag., vol. 18, no. 6, pp. 28–35, 2011.
+[72] W. Liu, X. Li, and M. Chen, “Energy efficiency of mimo transmissions in wireless sensor networks with diversity and multiplexing gains,” in Proc. IEEE Int. Conf. Acoustics, Speech, and Signal Processing (ICASSP ’05), vol. 4, 2005.
+[73] B. Bougard, G. Lenoir, A. Dejonghe, L. Van der Perre, F. Catthoor, and
+W. Dehaene, “Smart mimo: An energy-aware adaptive mimo-ofdm radio link control for next-generation wireless local area networks,” EURASIP Journal on Wireless Communications and Networking, vol. 2007, no. 3,
+p. 13, 2007.
+[74] Q. Gao, Y. Zuo, J. Zhang, and X.-H. Peng, “Improving energy efficiency in a wireless sensor network by combining cooperative mimo with data aggregation,” IEEE Trans. Veh. Technol., vol. 59, no. 8, pp. 3956–3965, 2010.
+[75] E. V. Belmega and S. Lasaulce, “Energy-efficient precoding for multiple- antenna terminals,” IEEE Trans. Signal Process., vol. 59, no. 1, pp. 329–340, 2011.
+[76] C. Liang and K. R. Dandekar, “Power management in mimo ad hoc networks: A game-theoretic approach,” IEEE Trans. Wireless Commun., vol. 6, no. 4, pp. 1164–1170, 2007.
+[77] S. K. Jayaweera, “Virtual mimo-based cooperative communication for energy-constrained wireless sensor networks,” IEEE Trans. Wireless Commun., vol. 5, no. 5, pp. 984–989, 2006.
+[78] S. Hussain, A. Azim, and J. Park, “Energy efficient virtual mimo com- munication for wireless sensor networks,” Telecommunication Systems, vol. 42, no. 1, pp. 139–149, 2009.
+[79] C. Y. Wong, R. S. Cheng, K. B. Lataief, and R. D. Murch, “Multiuser ofdm with adaptive subcarrier, bit, and power allocation,” IEEE J. Sel. Areas Commun., vol. 17, no. 10, pp. 1747–1758, 1999.
+[80] G. Miao, N. Himayat, Y. Li, and D. Bormann, “Energy efficient design in wireless ofdma,” in Communications, 2008. ICC’08. IEEE International Conference on. IEEE, 2008, pp. 3307–3312.
+
+
+[81] G. Miao, N. Himayat, and Y. Li, “Energy-efficient transmission in frequency-selective channels,” in Global Telecommunications Confer- ence, 2008. IEEE GLOBECOM 2008. IEEE. IEEE, 2008, pp. 1–5.
+[82] G. Miao, N. Himayat, and G. Y. Li, “Energy-efficient link adaptation in frequency-selective channels,” IEEE Trans. Commun., vol. 58, no. 2,
+pp. 545–554, 2010.
+[83] G. Miao, N. Himayat, G. Li, and S. Talwa, “Low-complexity energy- efficient ofdma,” in Communications, 2009. ICC’09. IEEE International Conference on. IEEE, 2009, pp. 1–5.
+[84] H. Kim and B. Daneshrad, “Energy-constrained link adaptation for mimo ofdm wireless communication systems,” IEEE Trans. Wireless Commun., vol. 9, no. 9, pp. 2820–2832, 2010.
+[85] A. J. Goldsmith and S. B. Wicker, “Design challenges for energy- constrained ad hoc wireless networks,” IEEE Wireless Commun. Mag., vol. 9, no. 4, pp. 8–27, 2002.
+[86] M. Bohge, J. Gross, A. Wolisz, and M. Meyer, “Dynamic resource allocation in ofdm systems: an overview of cross-layer optimization principles and techniques,” IEEE Network, vol. 21, no. 1, pp. 53–59, 2007.
+
+
+
+
+Daquan Feng received his B.S. degree in commu- nication engineering in 2008 from Henan Univer- sity, Kaifeng,China.He is currently puring his Ph.D. degree at National key Laboratory of Science and Technology on Communications, University of Elec- tronic Science and Technology of China, Chengdu, China.Since August 2011, he is working as a visiting student in the School of Electrical and Computer En- gineering, Georgia Institute of Technology,Atlanta, GA, USA. His research interests include cognitive radio, energy-efficient resource allocation, and het-
+erogeneous network.
+
+
+
+Chenzi Jiang received her B.S. degree from the School of Telecommunication Engineering, Beijing University of Posts and Telecommunications, Bei- jing, China, and her M.S degree from the De- partment of Electrical and Computer Engineering, University of Delaware, Newark, DE, USA, in 2008 and 2011, respectively. She is currently a Ph.D. can- didate in the Department of Electrical and Computer Engineering, University of Delaware. Her research interests are in wireless communications and net- working, including MIMO, heterogeneous networks,
+and energy-efficient wireless network design.
+
+
+
+Gubong Lim received the B.S. in Electrical Engi- neering in 2003 from Gangneung National Univer- sity, Gangneung, Korea, and the M.S. degree from the University of Delaware, Newark, DE, in 2005. From 2005 to 2009, he worked as an engineer at Samsung Electronics. From 2009, he is currently working toward the Ph.D degree in the University of Delaware. His research includes wireless OFDM and energy-efficient cooperative communication sys- tems.
+
+178                               IEEE COMMUNICATIONS SURVEYS & TUTORIALS, VOL. 15, NO. 1, FIRST QUARTER 2013
+
+
+Leonard J. Cimini, Jr. (S’77-M’82-SM’89-F’00)
+received the Ph.D. from the University of Pennsyl- vania in 1982. He worked at AT&T, first in Bell Labs and then AT&T Labs, for 20 years. He has been a Professor at the University of Delaware, Newark, since 2002.
+Dr. Cimini began his ComSoc activities twenty- five years ago in the Communication Theory Tech- nical Committee. He is currently VP - Publications, and, among other publications-related positions, is the founding Editor-in-Chief of the IEEE J-SAC:
+Wireless Communications Series. He was elected an IEEE Fellow in 2000 for contributions to the theory and practice of high-speed wireless commu- nications. For this pioneering work, he was given the 2007 James R. Evans Avant Garde Award from the IEEE Vehicular Technology Society and the 2010 Innovators Award from the NJ Inventors Hall of Fame. In 2010, he received several ComSoc awards, including the Stephen O. Rice Prize, the Donald W. McLellan Meritorious Service Award, and the Recognition Award from the Wireless Communications Technical Committee.
+Gang Feng (M’01, SM’06) received his BEng. and MEng degrees in Electronic Engineering from the University of Electronic Science and Technology of China (UESTC), in 1986 and 1989, respectively, and the Ph.D. degrees in Information Engineering from The Chinese University of Hong Kong in 1998. He joined the School of Electric and Electronic Engineering, Nanyang Technological University in December 2000 as an assistant professor and was promoted as an associate professor in October 2005. At present he is a professor with the National Labo-
+ratory of Communications, University of Electronic Science and Technology
+of China.
+Dr. Feng has extensive research experience and has published widely in computer networking and wireless networking research. His research interests include resource management in wireless networks, wireless network coding, energy efficient wireless networking, etc. Dr. Feng is a senior member of IEEE.
+
+
+
+
+Geoffrey Ye Li received his B.S.E. and M.S.E. degrees in 1983 and 1986, respectively, from the Department of Wireless Engineering, Nanjing Insti- tute of Technology, Nanjing, China, and his Ph.D. degree in 1994 from the Department of Electrical Engineering, Auburn University, Alabama. He was with AT&T Labs - Research at Red Bank, New Jersey and is now with Georgia Institute of Technol- ogy, Atlanta, Georgia, as a Professor. His general re- search interests include statistical signal processing and telecommunications, with emphasis on OFDM
+and MIMO techniques, cross-layer optimization, and signal processing issues in cognitive radios. In these areas, he has published over 200 papers in refereed journals or conferences and two books, 20 of which are with over 100 Google citations. He also has over 20 patents granted or filed. He has been awarded an IEEE Fellow since 2006 and won 2010 IEEE Communications Society Stephen O. Rice Prize Paper Award in the field of communications theory.

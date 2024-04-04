@@ -1,0 +1,294 @@
+**Text:**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#(RPP – Regularity, Punctuality, Performance), (SPO – Submission, Presentation, Oral)
+
+
+
+
+**Tables:**
+	PUNE INSTITUTE OF COMPUTER TECHNOLOGY, PUNE -43	PUNE INSTITUTE OF COMPUTER TECHNOLOGY, PUNE -43	PUNE INSTITUTE OF COMPUTER TECHNOLOGY, PUNE -43	
+	Department of Electronics and Telecommunication Engineering	Department of Electronics and Telecommunication Engineering	Department of Electronics and Telecommunication Engineering	
+	ASSESSMENT YEAR: - 2021-22	ASSESSMENT YEAR: - 2021-22	CLASS: - SE	
+	Subject: - Object Oriented Programming	Subject: - Object Oriented Programming	Subject: - Object Oriented Programming	
+Expt. No:       1	LAB Ref: ETC/2021-22/	ROLL NO: 22176	SUBMISION DATE:	
+Title: - Sorting an array using functions.	Title: - Sorting an array using functions.	
+Problem Statement: - Write a program in C++ to sort the numbers in an array using separate functions for reading,	Problem Statement: - Write a program in C++ to sort the numbers in an array using separate functions for reading,	
+display, sort, and swap. The objective of this assignment is to learn the concepts of input, output, functions, call by	display, sort, and swap. The objective of this assignment is to learn the concepts of input, output, functions, call by	
+reference in C++.	reference in C++.	
+		
+Objectives: - Learn to create and display an array.	Objectives: - Learn to create and display an array.	
+	Implement various operations on the array using functions	
+		
+Theory (Write Theory of the new concept demonstrated in this Assignment)	Theory (Write Theory of the new concept demonstrated in this Assignment)	
+1)  Functions -	1)  Functions -	
+A function is a block of code, which runs only when called. Data can be passed into the function while calling it,	A function is a block of code, which runs only when called. Data can be passed into the function while calling it,	
+known as arguments. C++ program must have at least one function i.e. main(). There is no limit on the number of	known as arguments. C++ program must have at least one function i.e. main(). There is no limit on the number of	
+functions. Each function is called in a sequence specified by the function calls in main(). After each function has	functions. Each function is called in a sequence specified by the function calls in main(). After each function has	
+done its job, control returns to the next location from where it has been called.	done its job, control returns to the next location from where it has been called.	
+		
+2) Arrays -	2) Arrays -	
+Arrays are used to store multiple values in a single variable. An array is a special variable, which can hold more	Arrays are used to store multiple values in a single variable. An array is a special variable, which can hold more	
+one value at a time. They are used to store similar types of elements as the data type must be the same for all	one value at a time. They are used to store similar types of elements as the data type must be the same for all	
+elements.	elements.	
+Declared as – (datatype) (varname)[10], example – int arr[10]. Here, 10 is the limit of no. of elements predefined	Declared as – (datatype) (varname)[10], example – int arr[10]. Here, 10 is the limit of no. of elements predefined	
+in the array.	in the array.	
+		
+3) Reference Variables -	3) Reference Variables -	
+When a variable is declared as a reference, it becomes an alternative name for an existing variable. A variable can	When a variable is declared as a reference, it becomes an alternative name for an existing variable. A variable can	
+be declared as a reference by putting ‘&’ in the declaration.	be declared as a reference by putting ‘&’ in the declaration.	
+For example- int i = 10;	For example- int i = 10;	
+int & j = i;	int & j = i;	
+Here we can access the value of i using the original variable itself and also the reference variable r.	Here we can access the value of i using the original variable itself and also the reference variable r.	
+References are usually used for function arguments and return values.	References are usually used for function arguments and return values.	
+Call by reference - Call by reference is a method of passing arguments to a function using reference variables,	Call by reference - Call by reference is a method of passing arguments to a function using reference variables,	
+here we give the address of the variable value and thus modifies the value of that variable.	here we give the address of the variable value and thus modifies the value of that variable.	
+In call by value, the arguments passed are just the value, not its address.	In call by value, the arguments passed are just the value, not its address.	
+For example in the swap function:	For example in the swap function:	
+void swap(int& x, int& y)
+{
+	int temp;
+	temp = x;
+	x = y;
+	y = temp;
+}	void swap(int& x, int& y)
+{
+	int temp;
+	temp = x;
+	x = y;
+	y = temp;
+}	
+Here the values of x and y get modified (swapped).	Here the values of x and y get modified (swapped).	
+Algorithm: -	
+Creating an array	
+Start
+Declare an integer array int arr [10] with a maximum size of 10.
+Ask user to enter how elements he wants in an array save size in n.
+For(i = 0;i<n;i++)
+Scan element one by one
+End for loop
+End	
+	
+Displaying an array	
+Start
+Declare an integer array int arr [10] with a maximum size of 10.
+Ask user to enter how elements he wants in an array save size in n.
+For(i = 0;i<n;i++)
+Scan element one by one
+End for loop
+For(i=0;i<n;i++)
+Print each element one by one
+End for Loop
+End	
+	
+Swapping elements in the array	
+Start by calling the function swap with argument int&x and int&y
+Declare an integer variable called temp, i and j as iterating variables
+temp = x;
+x = y;
+y = temp;
+End of function	
+	
+Sorting elements in array (Bubble Sort)	
+Start by calling the function sort with argument int n and int arr[]
+For(i=0;i<n;i++)
+For(j=0;j<n-i;j++)
+If(arr[j]>arr[j+1])
+   swap(&arr[j], &arr[j+1])
+End for inner loop
+End for outer loop
+End of function	
+Flowchart: -	
+	
+Code -	
+//Problem Statement - Write a program in C++ to sort the numbers in an array using separate functions for read, display, sort and swap. The objective of this assignment is to learn the concepts of input, output, functions, call by reference in C++.
+//22176
+//SE 5, H5
+//Vedansh Gupta
+
+#include<iostream>
+using namespace std;
+
+void read(int* n, int arr[])
+{
+    
+    cout<<"Enter the elements of array one by one:"<<endl;
+    for (int i = 0; i < *n; i++)
+    {
+        cin>>arr[i];
+    }
+}
+
+void display(int* n, int arr[])
+{
+    cout<<"The array:\t";
+    for (int i = 0; i < *n; i++)
+    {
+        cout<<arr[i]<<"\t";    
+    }    
+}
+
+void swap(int *x, int *y)
+{
+	int temp = *x;
+	*x = *y;
+	*y = temp;
+}
+
+void bubblesort(int n, int arr[])
+{
+    cout<<"Using bubble sort for sorting the array!";
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n-i-1; j++)
+        {
+            if (arr[j]>arr[j+1])
+            {
+                swap(&arr[j], &arr[j+1]);
+            }
+        }
+    }
+}
+
+int main()
+{
+    cout<<"Start\n";
+    int n, z, choice, checker;
+    z=1;
+    cout<<"Enter the number of elements in the array: ";
+    cin>>n;
+    int arr[n];
+    read(&n, arr);
+    cout<<"\nEntered array elements!"<<endl;
+
+    while(z == 1)
+    {
+        cout<<"Enter the number corresponding to serial no. of operation to be performed on the array.\n1) Display\n2) Sort\n3) Swap\n:";
+        cin>>choice;
+        switch (choice)
+        {
+        case 1: //Display
+        {
+            display(&n, arr);   
+            break;
+        }
+        case 2: //Sort
+        {
+            bubblesort(n, arr);
+            checker = 0;
+            cout<<"\nDo you want the array to be displayed?(yes:1/no:0):";
+            cin>>checker;
+            if (checker)
+            {
+                display(&n, arr);
+            }
+            break;            
+        }
+        case 3: //Swapping
+        {
+            int a, b;
+            cout<<"\n";
+            display(&n, arr);
+            cout<<"\nEnter the index of two numbers in the array which needs to be swapped:(1st number has index 1): ";
+            cin>>a>>b;
+            swap(&arr[a-1], &arr[b-1]);
+
+            checker = 0;
+            cout<<"\nDo you want the array to be displayed?(yes:1/no:0):";
+            cin>>checker;
+            if (checker)
+            {
+                display(&n, arr);
+            }
+            break;
+        }
+        default:
+        {
+            cout<<"\nEnter number between 1 and 3, try again!";
+            break;
+        }
+        }
+        cout<<"\nDo you want to perform another function?(yes:1/no:0): ";
+        cin>>z;
+        cout<<endl;
+    }
+    cout<<"\nEnd of execution!";
+    return 0;
+}	
+Output -	
+Start
+Enter the number of elements in the array: 5
+Enter the elements of array one by one:
+7
+45
+68
+777
+1
+
+Entered array elements!
+Enter the number corresponding to serial no. of operation to be performed on the array.
+1) Display
+2) Sort
+3) Swap
+:1
+The array:      7       45      68      777     1     
+Do you want to perform another function?(yes:1/no:0): 1
+
+Enter the number corresponding to serial no. of operation to be performed on the array.
+1) Display
+2) Sort
+3) Swap
+:2
+Using bubble sort for sorting the array!
+Do you want the array to be displayed?(yes:1/no:0):1
+The array:      1       7       45      68      777   
+Do you want to perform another function?(yes:1/no:0): 1
+
+Enter the number corresponding to serial no. of operation to be performed on the array.
+1) Display
+2) Sort
+3) Swap
+:3
+
+The array:      1       7       45      68      777
+Enter the index of two numbers in the array which needs to be swapped:(1st number has index 1): 4
+1
+
+Do you want the array to be displayed?(yes:1/no:0):1
+The array:      68      7       45      1       777
+Do you want to perform another function?(yes:1/no:0): 0
+
+End of execution!	
+Learning Outcomes: -	Learning Outcomes: -	Learning Outcomes: -	
+	1	Basic C++ syntax	
+	2	Datatypes – Inbuilt and User Defined	
+	3	References	
+	4	Functions	
+			
+Continuous Assessment	Continuous Assessment	Continuous Assessment	Continuous Assessment	
+RPP (out of 5)	SPO (out of 5)	Total (Out of 10)	Sign	
+			Date: -	
+Important Questions: -	
+1.	
+2.	
+3.	
+4.	
+5.	
+6.	
+7.	
+8.	
+9.	
+10.	
